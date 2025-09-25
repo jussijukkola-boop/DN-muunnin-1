@@ -1,9 +1,10 @@
 let data = [];
 
 function loadCSV() {
-    Papa.parse('dn_data.csv', {
+    Papa.parse('DN koko excel cvs.csv', { // Päivitetty tiedostonimi
         download: true,
         header: true,
+        delimiter: ',', // Oletetaan pilkku erottimena, tarkista tämä
         complete: function(results) {
             data = results.data;
             populateDropdowns();
