@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DN-Muunnin</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>DN-Muunnin</h1>
+        <label for="dn-select">Valitse DN:</label>
+        <select id="dn-select" onchange="updateResults()">
+            <option value="">-- Valitse DN --</option>
+        </select>
+
+        <label for="outer-diameter-select">Valitse Ulkohalkaisija:</label>
+        <select id="outer-diameter-select" onchange="updateResults()">
+            <option value="">-- Valitse Ulkohalkaisija --</option>
+        </select>
+
+        <label for="inch-size-select">Valitse Tuumakoko:</label>
+        <select id="inch-size-select" onchange="updateResults()">
+            <option value="">-- Valitse Tuumakoko --</option>
+        </select>
+
+        <div id="result">
+            <h2>Tulokset:</h2>
+            <p id="result-dn">DN: -</p>
+            <p id="result-outer-diameter">Ulkohalkaisija: -</p>
+            <p id="result-inch-size">Tuumakoko: -</p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
