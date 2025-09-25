@@ -1,10 +1,10 @@
 let data = [];
 
 function loadCSV() {
-    Papa.parse('DN koko excel cvs.csv', { // Päivitetty tiedostonimi
+    Papa.parse('DN koko excel cvs.csv', {
         download: true,
         header: true,
-        delimiter: ',', // Oletetaan pilkku erottimena, tarkista tämä
+        delimiter: ';', // Puolipiste erottimena
         complete: function(results) {
             data = results.data;
             populateDropdowns();
@@ -24,13 +24,13 @@ function populateDropdowns() {
         dnSelect.appendChild(dnOption);
 
         const outerOption = document.createElement('option');
-        outerOption.value = row.Ulkohalkaisija;
-        outerOption.textContent = row.Ulkohalkaisija;
+        outerOption.value = row['Ulkohalkaisija (mm)']; // Huomaa lainausmerkit suluilla varustetun nimen vuoksi
+        outerOption.textContent = row['Ulkohalkaisija (mm)'];
         outerDiameterSelect.appendChild(outerOption);
 
         const inchOption = document.createElement('option');
-        inchOption.value = row.Tuumakoko;
-        inchOption.textContent = row.Tuumakoko;
+        inchOption.value = row.Tuuma;
+        inchOption.textContent = row.Tuuma;
         inchSizeSelect.appendChild(inchOption);
     });
 }
@@ -45,15 +45,15 @@ function updateResults() {
     if (dnSelect) {
         selectedRow = data.find(row => row.DN === dnSelect);
     } else if (outerDiameterSelect) {
-        selectedRow = data.find(row => row.Ulkohalkaisija === outerDiameterSelect);
+        selectedRow = data.find(row => row['Ulkohalkaisija (mm)'] === outerDiameterSelect);
     } else if (inchSizeSelect) {
-        selectedRow = data.find(row => row.Tuumakoko === inchSizeSelect);
+        selectedRow = data.find(row => row.Tuuma === inchSizeSelect);
     }
 
     if (selectedRow) {
         document.getElementById('result-dn').textContent = `DN: ${selectedRow.DN}`;
-        document.getElementById('result-outer-diameter').textContent = `Ulkohalkaisija: ${selectedRow.Ulkohalkaisija}`;
-        document.getElementById('result-inch-size').textContent = `Tuumakoko: ${selectedRow.Tuumakoko}`;
+        document.getElementById('result-outer-diameter').textContent = `Ulkohalkaisija: ${selectedRow['Ulkohalkaisija (mm)']}`;
+        document.getElementById('result-inch-size').textContent = `Tuumakoko: ${selectedRow.Tuuma}`;
     } else {
         document.getElementById('result-dn').textContent = `DN: -`;
         document.getElementById('result-outer-diameter').textContent = `Ulkohalkaisija: -`;
